@@ -48,6 +48,7 @@ struct Args {
     pub raw: bool,
 
     /// The roots to use for discovery.
+    #[clap(required = true)]
     pub roots: Vec<PathBuf>,
 }
 
