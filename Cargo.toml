@@ -5,12 +5,11 @@ edition = "2021"
 
 authors = ["Adrian Wannenmacher <tfld@tfld.dev>"]
 license = "EUPL-1.2"
+repository = "https://github.com/TeFiLeDo/tree-owners"
 
 description = "Find all owners (user and group) inside a directory tree."
 categories = ["command-line-utilities", "filesystem"]
-keywords = ["cli", "linux", "file", ]
-
-publish = false
+keywords = ["cli", "linux", "file"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
