@@ -1,11 +1,12 @@
 use std::{collections::BTreeSet, fmt::Display};
 
-use anyhow::{anyhow,Error, Result};
-use file_owner::{Owner, Group};
+use anyhow::{anyhow, Error, Result};
+use file_owner::{Group, Owner};
 use serde::Serialize;
 
 use crate::id::Ids;
 
+/// Unique user and group names.
 #[derive(Debug, Default, Serialize)]
 pub struct Names {
     pub users: BTreeSet<String>,

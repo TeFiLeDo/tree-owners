@@ -35,6 +35,7 @@ fn main() -> Result<()> {
     Ok(())
 }
 
+/// Command line arguments.
 #[derive(Debug, Parser)]
 #[clap(author, about, version)]
 struct Args {
@@ -50,6 +51,7 @@ struct Args {
     pub roots: Vec<PathBuf>,
 }
 
+/// Perform gid & uid gathering for a file, or a directory and its children.
 fn fs_entry(entry: &Path, summary: &mut Ids) -> Result<()> {
     let display = entry.display();
     ensure!(

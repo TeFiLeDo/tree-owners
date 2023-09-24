@@ -2,6 +2,7 @@ use std::{collections::BTreeSet, fmt::Display};
 
 use serde::Serialize;
 
+/// Unique `uid`s and `gid`s.
 #[derive(Debug, Default, Serialize)]
 pub struct Ids {
     pub users: BTreeSet<u32>,
