@@ -69,7 +69,7 @@ fn fs_entry(entry: &Path, summary: &mut Ids) -> Result<()> {
         let children = read_dir(entry).context(format!("failed to read dir {}", display))?;
         for e in children {
             let e = e.context(format!("invalid child for {}", display))?;
-            fs_entry(&e.path(), summary).context(format!("failed to read child of {}", display))?;
+            fs_entry(&e.path(), summary)?;
         }
     }
 
