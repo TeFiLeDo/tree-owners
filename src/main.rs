@@ -1,14 +1,11 @@
-use std::{
-    fs::read_dir,
-    os::linux::fs::MetadataExt,
-    path::{Path, PathBuf},
-};
+use std::{fs::read_dir, os::linux::fs::MetadataExt, path::Path};
 
 use anyhow::{ensure, Context, Result};
 use clap::Parser;
 
-use crate::{id::Ids, name::Names, output::Output};
+use crate::{cli::Args, id::Ids, name::Names, output::Output};
 
+mod cli;
 mod id;
 mod name;
 mod output;
@@ -33,23 +30,6 @@ fn main() -> Result<()> {
     println!("{output}");
 
     Ok(())
-}
-
-/// Command line arguments.
-#[derive(Debug, Parser)]
-#[clap(author, about, version)]
-struct Args {
-    /// Whether to output data as json.
-    #[clap(long)]
-    pub json: bool,
-
-    /// Whether to output raw uid and gid numbers.
-    #[clap(long)]
-    pub raw: bool,
-
-    /// The roots to use for discovery.
-    #[clap(default_value = ".")]
-    pub roots: Vec<PathBuf>,
 }
 
 /// Perform gid & uid gathering for a file, or a directory and its children.
