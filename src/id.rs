@@ -16,7 +16,7 @@ impl Display for Ids {
             writeln!(f, "    {user}")?;
         }
 
-        writeln!(f, "")?;
+        writeln!(f)?;
 
         writeln!(f, "groups:")?;
         for group in &self.groups {
