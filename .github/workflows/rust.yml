@@ -1,4 +1,4 @@
-name: Rust
+name: Test
 
 on:
   push:
@@ -28,3 +28,30 @@ jobs:
           files: |
             LICENSE
             target/debug/tree-owners
+
+---
+
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release:
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build
+        run: cargo build --release --verbose
+      - name: Run tests
+        run: cargo test --release --verbose
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          files: |
+            LICENSE
+            target/release/tree-owners
