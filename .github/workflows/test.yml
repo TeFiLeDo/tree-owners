@@ -30,6 +30,6 @@ jobs:
           files: |
             LICENSE
             target/debug/tree-owners
-            ci-out/tree-owners.bash
-            ci-out/tree-owners.fish
-            ci-out/tree-owners.zsh
+            ../ci-out/tree-owners.bash
+            ../ci-out/tree-owners.fish
+            ../ci-out/tree-owners.zsh

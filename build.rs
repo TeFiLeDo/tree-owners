@@ -11,8 +11,8 @@ include!("src/cli.rs");
 
 fn main() -> Result<()> {
     let out = if env::var("CI").map(|ci| ci == "true").unwrap_or_default() {
-        create_dir("ci-out").context("failed to create CI output directory")?;
-        "./ci-out".to_string()
+        create_dir("../ci-out").context("failed to create CI output directory")?;
+        "../ci-out".to_string()
     } else {
         env::var("OUT_DIR").context("OUT_DIR not set")?
     };

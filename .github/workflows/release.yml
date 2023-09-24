@@ -23,6 +23,8 @@ jobs:
         run: cargo build --release --verbose
       - name: Run tests
         run: cargo test --release --verbose
+      - name: Adjust compiler output
+        run: mv ci-out/_tree-owners ci-out/tree-owners.zsh
       - name: Publish to crates.io
         run: cargo publish
         env:
@@ -35,3 +37,6 @@ jobs:
           files: |
             LICENSE
             target/release/tree-owners
+            ../ci-out/tree-owners.bash
+            ../ci-out/tree-owners.fish
+            ../ci-out/tree-owners.zsh
