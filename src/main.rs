@@ -38,18 +38,18 @@ fn fs_entry(entry: &Path, summary: &mut Summary) {
     let display = entry.display();
     if !entry.exists() && !entry.is_symlink() {
         print_root_err(format!("{display} doesn't exist"));
+        return;
     }
 
-    let meta = match entry.symlink_metadata() {
-        Ok(meta) => meta,
+    match entry.symlink_metadata() {
+        Ok(meta) => {
+            summary.add_user(meta.st_uid());
+            summary.add_group(meta.st_gid());
+        }
         Err(e) => {
             print_err(e, format!("failed to get metadata for {display}"));
-            return;
         }
     };
-
-    summary.add_user(meta.st_uid());
-    summary.add_group(meta.st_gid());
 
     if entry.is_dir() {
         let children = match read_dir(entry) {
@@ -63,10 +63,7 @@ fn fs_entry(entry: &Path, summary: &mut Summary) {
         for child in children {
             match child {
                 Ok(child) => fs_entry(&child.path(), summary),
-                Err(e) => {
-                    print_err(e, format!("invalid child for {display}"));
-                    return;
-                }
+                Err(e) => print_err(e, format!("invalid child for {display}")),
             }
         }
     }
