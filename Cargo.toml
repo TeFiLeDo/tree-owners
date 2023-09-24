@@ -2,8 +2,14 @@
 name = "tree-owners"
 version = "0.1.0"
 edition = "2021"
+
 authors = ["Adrian Wannenmacher <tfld@tfld.dev>"]
+license = "EUPL-1.2"
+
 description = "Find all owners (user and group) inside a directory tree."
+categories = ["command-line-utilities", "filesystem"]
+keywords = ["cli", "linux", "file", ]
+
 publish = false
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html

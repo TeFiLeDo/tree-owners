@@ -2,6 +2,8 @@
 
 Find all owners (user and group) inside a directory tree.
 
+© Adrian Wannenmacher - Licensed under the EUPL
+
 ## Usage
 
 To see available options run: `tree-owners --help`
