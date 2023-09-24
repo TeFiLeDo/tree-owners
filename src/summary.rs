@@ -3,6 +3,9 @@ use std::{collections::BTreeMap, fmt::Display};
 use file_owner::{FileOwnerError, Group, Owner};
 use serde::Serialize;
 
+/// An error specific to a `uid` or `gid`.
+pub type IdError = (u32, FileOwnerError);
+
 /// Lists of unique [User]s and [Group]s.
 #[derive(Debug, Default, Serialize)]
 pub struct Summary {
@@ -22,7 +25,7 @@ impl Summary {
     }
 
     /// Look up the names of all users and groups.
-    pub fn lookup_names(&mut self) -> (Vec<(u32, FileOwnerError)>, Vec<(u32, FileOwnerError)>) {
+    pub fn lookup_names(&mut self) -> (Vec<IdError>, Vec<IdError>) {
         let mut user_failures = vec![];
         for (uid, name) in &mut self.users {
             if name.is_some() {

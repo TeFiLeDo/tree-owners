@@ -1,6 +1,6 @@
 use std::{fs::read_dir, os::linux::fs::MetadataExt, path::Path};
 
-use anyhow::{anyhow, ensure, Context, Error, Result};
+use anyhow::{anyhow, Context, Error, Result};
 use clap::Parser;
 
 use crate::{cli::Args, summary::Summary};
