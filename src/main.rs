@@ -1,31 +1,42 @@
 use std::{fs::read_dir, os::linux::fs::MetadataExt, path::Path};
 
-use anyhow::{ensure, Context, Result};
+use anyhow::{anyhow, ensure, Context, Result};
 use clap::Parser;
 
-use crate::{cli::Args, id::Ids, name::Names, output::Output};
+use crate::{cli::Args, summary::Summary};
 
 mod cli;
-mod id;
-mod name;
-mod output;
+mod summary;
 
 fn main() -> Result<()> {
     human_panic::setup_panic!();
     let args = Args::parse();
 
-    let mut ids = Ids::default();
+    let mut summary = Summary::default();
     for root in args.roots {
-        fs_entry(&root, &mut ids)?;
+        fs_entry(&root, &mut summary)?;
     }
 
-    let output: Box<dyn Output> = match args.raw {
-        false => Box::new(Names::try_from(ids).context("failed to get names")?),
-        true => Box::new(ids),
-    };
+    if !args.raw {
+        let (uf, gf) = summary.lookup_names();
+
+        for (uid, e) in uf {
+            eprintln!(
+                "{:#}",
+                anyhow!(e).context(format!("failed to get name for user {uid}"))
+            );
+        }
+
+        for (gid, e) in gf {
+            eprintln!(
+                "{:#}",
+                anyhow!(e).context(format!("failed to get name for group {gid}"))
+            );
+        }
+    }
     let output = match args.json {
-        false => output.human_readable(),
-        true => output.json().context("failed json serialization")?,
+        false => summary.to_string(),
+        true => serde_json::to_string_pretty(&summary).context("json serialization failed")?,
     };
     println!("{output}");
 
@@ -33,7 +44,7 @@ fn main() -> Result<()> {
 }
 
 /// Perform gid & uid gathering for a file, or a directory and its children.
-fn fs_entry(entry: &Path, summary: &mut Ids) -> Result<()> {
+fn fs_entry(entry: &Path, summary: &mut Summary) -> Result<()> {
     let display = entry.display();
     ensure!(
         entry.is_symlink() || entry.exists(),
@@ -43,8 +54,8 @@ fn fs_entry(entry: &Path, summary: &mut Ids) -> Result<()> {
     let meta = entry
         .symlink_metadata()
         .context(format!("failed to get metadata for {}", display))?;
-    summary.users.insert(meta.st_uid());
-    summary.groups.insert(meta.st_gid());
+    summary.add_user(meta.st_uid());
+    summary.add_group(meta.st_gid());
 
     if entry.is_dir() {
         let children = read_dir(entry).context(format!("failed to read dir {}", display))?;
