@@ -6,15 +6,15 @@ use clap::Parser;
 #[derive(Debug, Parser)]
 #[clap(author, about, version)]
 pub(crate) struct Args {
-    /// Whether to output data as json.
+    /// Output data as json.
     #[clap(long)]
     pub json: bool,
 
-    /// Whether to output raw uid and gid numbers.
+    /// Don't output names, only uid and gid.
     #[clap(long)]
     pub raw: bool,
 
-    /// The roots to use for discovery.
+    /// Paths from where to start discovery. Recursion is applied to paths that are directories.
     #[clap(default_value = ".")]
     pub roots: Vec<PathBuf>,
 }
