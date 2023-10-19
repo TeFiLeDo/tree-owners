@@ -22,7 +22,7 @@ jobs:
       - name: Adjust compiler output
         run: mv ../ci-out/_tree-owners ../ci-out/tree-owners.zsh
       - uses: "marvinpinto/action-automatic-releases@latest"
-        if: github.event_name == "push"
+        if: github.event_name == 'push'
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
