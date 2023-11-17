@@ -7,7 +7,7 @@ updates:
       day: friday
     groups:
       minor:
-        exclude-paterns:
+        exclude-patterns:
           - file-owner # pre 1.0
         update-types:
           - minor
