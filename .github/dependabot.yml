@@ -1,0 +1,16 @@
+version: 2
+updates:
+  - package-ecosystem: cargo
+    directory: /
+    schedule: 
+      interval: weekly
+      day: friday
+    groups:
+      minor:
+        exclude-paterns:
+          - file-owner # pre 1.0
+        update-types:
+          - minor
+          - patch
+    reviewers:
+      - TeFiLeDo
