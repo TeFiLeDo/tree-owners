@@ -10,17 +10,17 @@ To see available options run: `tree-owners --help`
 
 Basic example when running in this repository:
 ```
-$ tree-owners .
+$ tree-owners
 users:
-    adrian
+    adrian (1000)
 
 groups:
-    users
+    users (985)
 ```
 
 Using `uid`s and `gid`s:
 ```
-$ tree-owners --raw .
+$ tree-owners --raw
 users:
     1000
 
@@ -30,13 +30,26 @@ groups:
 
 Using `json` output:
 ```
-$ tree-owners --json .
+$ tree-owners --json
 {
-  "users": [
-    "adrian"
-  ],
-  "groups": [
-    "users"
-  ]
+  "users": {
+    "1000": "adrian"
+  },
+  "groups": {
+    "985": "users"
+  }
+}
+```
+
+Combining `json` and `uid`/`gid`:
+```
+$ tree-owners --raw --json
+{
+  "users": {
+    "1000": null
+  },
+  "groups": {
+    "985": "users"
+  }
 }
 ```
