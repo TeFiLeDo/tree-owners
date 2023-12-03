@@ -1,6 +1,6 @@
 [package]
 name = "tree-owners"
-version = "1.0.2"
+version = "1.0.3"
 edition = "2021"
 
 authors = ["Adrian Wannenmacher <tfld@tfld.dev>"]
