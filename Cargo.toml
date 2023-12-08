@@ -15,7 +15,7 @@ keywords = ["cli", "linux", "file"]
 
 [dependencies]
 anyhow = "1.0.75"
-clap = { version = "4.4.10", features = ["derive", "cargo", "wrap_help"] }
+clap = { version = "4.4.11", features = ["derive", "cargo", "wrap_help"] }
 file-owner = "0.1.2"
 human-panic = "1.2.0"
 serde = { version = "1.0.193", features = ["derive"] }
@@ -23,5 +23,5 @@ serde_json = "1.0.107"
 
 [build-dependencies]
 anyhow = "1.0.75"
-clap = { version = "4.4.10", features = ["derive", "cargo", "wrap_help"] }
+clap = { version = "4.4.11", features = ["derive", "cargo", "wrap_help"] }
 clap_complete = "4.4.1"
