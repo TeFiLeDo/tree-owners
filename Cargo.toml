@@ -14,14 +14,14 @@ keywords = ["cli", "linux", "file"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-anyhow = "1.0.76"
-clap = { version = "4.4.11", features = ["derive", "cargo", "wrap_help"] }
+anyhow = "1.0.79"
+clap = { version = "4.4.16", features = ["derive", "cargo", "wrap_help"] }
 file-owner = "0.1.2"
-human-panic = "1.2.0"
-serde = { version = "1.0.193", features = ["derive"] }
-serde_json = "1.0.107"
+human-panic = "1.2.3"
+serde = { version = "1.0.195", features = ["derive"] }
+serde_json = "1.0.111"
 
 [build-dependencies]
-anyhow = "1.0.76"
-clap = { version = "4.4.11", features = ["derive", "cargo", "wrap_help"] }
-clap_complete = "4.4.1"
+anyhow = "1.0.79"
+clap = { version = "4.4.16", features = ["derive", "cargo", "wrap_help"] }
+clap_complete = "4.4.6"
